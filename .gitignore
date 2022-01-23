@@ -1,0 +1,5 @@
+bin/*
+obj/*
+.paket*
+.ionide*
+public/*
