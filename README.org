@@ -1,0 +1,5 @@
+#+TITLE: Ragusa.XML
+
+A XML Serializer written in F#, designed for type safety enforcement.
+
+This is a project in early WIP
