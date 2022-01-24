@@ -1,19 +1,12 @@
 namespace Ragusa.Xml
 
 [<RequireQualifiedAccess>]
-module Encode =
+module Encoder =
     open Types
     open System.Xml.Linq
 
-
-    let inline string (value : string) : XmlValue =
-        XElement("String", value)
-
-    let inline float (value : float) : XmlValue =
-        XElement("Float", value)
-
-    let inline bool (value : bool) : XmlValue =
-        XElement("Bool", value)
+    let inline primitive<'T> (value: 'T): XmlValue =
+        XElement(typeof<'T>.Name, value)
 
     let inline object (rootName: string) (values : (string * XmlValue) seq): XmlValue =
         values

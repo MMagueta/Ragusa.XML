@@ -3,3 +3,5 @@ obj/*
 .paket*
 .ionide*
 public/*
+.fake
+paket-files/*
