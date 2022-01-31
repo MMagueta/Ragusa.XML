@@ -4,6 +4,7 @@ module Router =
     open Saturn
     open Giraffe
     open Microsoft.AspNetCore.Http
+    open System.Xml.Linq
 
     [<CLIMutable>]
     type Health = {
@@ -18,8 +19,11 @@ module Router =
             task {
                 // return! ctx.WriteXmlAsync { Text = "Development Build"; Time = System.DateTime.Now; Version = 1.0; Flags = [| "xml"; "ident" |] }
                 ctx.SetContentType "text/xml; charset=utf-8"
-                //return! (Ragusa.Xml.Giraffe.Serializer.Respond (Encode.object "object1" ["object", Encode.object "object2" ["abc", Encode.string "def"; "hij", Encode.bool true]; "xyz", Encode.float 123.456])) next ctx
-                return! (Ragusa.Xml.Giraffe.Serializer.Respond (Encoder.primitive<string> "test string")) next ctx
+                // return! (Ragusa.Xml.Giraffe.Serializer.Respond (Encode.object "object1" ["object", Encode.object "object2" ["abc", Encode.string "def"; "hij", Encode.bool true]; "xyz", Encode.float 123.456])) next ctx
+                // printfn "%A" (Expression.test)
+                let test: Expression.ABC = {A = "Field A"; B = 1}
+                return! (Ragusa.Xml.Giraffe.Serializer.Respond (Expression.ABC.Encoder test)) next ctx
+                // return! (Ragusa.Xml.Giraffe.Serializer.Respond (Encoder.primitive<string> "test string")) next ctx
                 // return! (Ragusa.Xml.Giraffe.Serializer.Respond (Encoder.primitive { Text = "Development Build"; Time = System.DateTime.Now; Version = 1.0; Flags = [| "xml"; "ident" |] })) next ctx
             }
 

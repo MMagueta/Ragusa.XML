@@ -5,11 +5,11 @@ module Encoder =
     open Types
     open System.Xml.Linq
 
-    let inline primitive<'T> (value: 'T): XmlValue =
-        XElement(typeof<'T>.Name, value)
+    let inline primitive<'T> (name: string) (value: 'T): XElement =
+        XElement (name, value)
 
-    let inline object (rootName: string) (values : (string * XmlValue) seq): XmlValue =
+    let inline complex (rootName: string) (values : (string * XElement) seq): XElement =
         values
         |> Seq.map
             (fun (key, value) -> XElement(key, value))
-        |> fun x -> XElement(rootName, x)
+        |> fun x -> XElement (rootName, x)
